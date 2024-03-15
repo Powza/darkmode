@@ -165,23 +165,6 @@
           const dropdownContent = dropdown.querySelector("." + definedName + "__dropdown--menu");
           const links = dropdownContent.querySelectorAll("button");
 
-          // Add this function to calculate the position of the dropdown
-          function adjustDropdownPosition(dropdownContent) {
-            const dropdownRect = dropdownContent.getBoundingClientRect();
-            const dropdownHeight = dropdownRect.height;
-            const viewportHeight = window.innerHeight;
-            const dropdownTop = dropdownRect.top;
-
-            // Check if the dropdown extends beyond the bottom of the viewport
-            if (dropdownTop + dropdownHeight > viewportHeight) {
-              // Calculate the new top position
-              const newTop = viewportHeight - dropdownHeight - 10; // Adjust as needed
-
-              // Set the new top position
-              dropdownContent.style.top = newTop + "px";
-            }
-          }
-
           // Add click event listener to the dropdown button to toggle visibility
           dropdownToggle.addEventListener("click", () => {
             // Toggle the class to open/close the dropdown content
@@ -192,20 +175,6 @@
 
             // Update the aria-expanded attribute accordingly
             dropdownToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
-
-            // Adjust dropdown position
-            adjustDropdownPosition(dropdownContent);
-          });
-
-          // Add event listener for window resize
-          window.addEventListener("resize", () => {
-            // Check if the dropdown is open
-            if (dropdownContent.classList.contains(definedName + "--open")) {
-              // Reset dropdown position to original
-              dropdownContent.style.top = "";
-              // Recalculate and adjust dropdown position
-              adjustDropdownPosition(dropdownContent);
-            }
           });
 
           // Close the dropdown when clicking outside of it
