@@ -90,6 +90,9 @@ a {
   height: 24px;
   margin-right: 3px;
 }
+.darkmode__dropdown {
+  position: relative;
+}
 .darkmode__dropdown .darkmode__toggle {
   height: auto;
   width: auto;
@@ -99,6 +102,7 @@ a {
 }
 .darkmode__dropdown--menu {
   position: absolute;
+  z-index: 9999;
   display: none;
   margin: 5px 0 0 0;
   padding: 10px;

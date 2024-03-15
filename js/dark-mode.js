@@ -103,6 +103,24 @@
       }
     }
 
+    // Function to adjust dropdown position
+    function adjustDropdownPosition(dropdownToggle, dropdownMenu) {
+      const dropdownToggleRect = dropdownToggle.getBoundingClientRect();
+      const dropdownMenuHeight = dropdownMenu.offsetHeight + 10;
+      const windowHeight = window.innerHeight;
+      const dropdownToggleTop = dropdownToggleRect.top;
+
+      // Calculate space above and below the toggle button
+      const spaceAboveToggle = dropdownToggleTop;
+      const spaceBelowToggle = windowHeight - dropdownToggleTop - dropdownToggleRect.height;
+
+      // If there's not enough space below the toggle button, show the dropdown above it
+      if (spaceBelowToggle < dropdownMenuHeight && spaceAboveToggle >= dropdownMenuHeight) {
+        dropdownMenu.style.top = `${-dropdownMenuHeight}px`; // Position above the toggle button
+      } else {
+        dropdownMenu.style.top = `${dropdownToggleRect.height}px`; // Reset to default
+      }
+    }
     // Toggle dark/light mode
     document.addEventListener("DOMContentLoaded", () => {
       const definedName = "darkmode";
@@ -169,6 +187,8 @@
           dropdownToggle.addEventListener("click", () => {
             // Toggle the class to open/close the dropdown content
             dropdownContent.classList.toggle(definedName + "--open");
+
+            adjustDropdownPosition(dropdownToggle, dropdownContent);
 
             // Get the current state of the dropdown content
             var isOpen = dropdownContent.classList.contains(definedName + "--open");
